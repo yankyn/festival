@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+{% load dajaxice_templatetags %}
+<head>
+    {% dajaxice_js_import %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Festival</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'tracker/bootstrap/css/bootstrap.css' %}" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Festival</a>
+        </div>
+    </div>
+</div>
+
+<div class="jumbotron">
+    <div class="container">
+        <h1>{{track.title}}</h1>
+
+        <h2>Chance of being played: {{percent}}%</h2>
+        {% for year in years %}
+            <p>Number of plays in year {{ year.year }}: {{ year.plays }}/{{ year.shows }}</p>
+        {% endfor %}
+        <p><a class="btn btn-primary btn-lg" role="button" onClick="skip_song();">Skip &raquo;</a></p>
+    </div>
+</div>
+
+<div class="container">
+      <div class="row">
+         {% for other_track in other_tracks %}
+            <div class="col-md-4">
+              <h2>{{ other_track.artist }} - {{ other_track.track }}</h2>
+              <p>Chance of playing live: {{ other_track.percent }}%</p>
+              <p>Last played: {{ other_track.time }}</p>
+            </div>
+          {% endfor %}
+      </div>
+
+      <hr>
+
+    </div> <!-- /container -->
+
+<script src="{% static 'tracker/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'tracker/jquery-2.1.1.min.js' %}"></script>
+<script src="{% static 'tracker/dajax/jquery.dajax.core.js' %}"></script>
+<script src="{% static 'tracker/js/foobar.js' %}"></script>
+</body>
+</html>
